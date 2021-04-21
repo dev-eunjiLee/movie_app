@@ -1,11 +1,77 @@
 /////////////////////////////////////////////////////////////////////////////
 /** 
- *  #4 0 Fetching Movies from API ~ 
+ *  #6 0 Getting Ready for the Router ~ 
  */
 /////////////////////////////////////////////////////////////////////////////
+import React from "react";
+import { BrowserRouter, HashRouter, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import About from "./routes/About";
+import Detail from "./routes/Detail";
+import Navigation from "./components/Navigation";
+
+function App(){
+  return(
+
+    /**
+     * 이 Navigation.js는 react-router-dom의 Link를 사용해 구현되었기 때문에
+     * App.js에서 HashRouters 밖에서 사용 불가
+     */
+
+  <HashRouter>
+    <Navigation />
+    <Route path="/" exact={true} component={Home}/>
+    <Route path="/about" component={About}/>
+    <Route path="/movie/:id" component={Detail}/>
+  </HashRouter>);
+
+  /*
+    다중 컴포넌트 랜더링 예시
+
+    <HashRouter>
+      <Route path="/home">
+        <h1>home</h1>
+      </Route>
+      <Route path="/home/introduction">
+        <h1>home with Introduction</h1>
+      </Route>
+      <Route path="/about">
+        <h1>About</h1>
+      </Route>
+    </HashRouter>
+  */
+  
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+/** 
+ *  #4 0 Fetching Movies from API ~ #5 0 Deploying to Github Pages
+ * 다음 수업을 위해 아래 내용 주석 처리
+ */
+/////////////////////////////////////////////////////////////////////////////
+/*
 import axios from "axios";
 import React from "react";
-import Movie from "./Movie";
+import Movie from "./components/Movie";
 import "./App.css"
 
 class App extends React.Component{
@@ -38,6 +104,7 @@ class App extends React.Component{
      *        await: 이 뒤에걸 기다려야해!
      *        --> 즉, axious가 끝날 때 까지 기다린다!
      */ 
+  /*  
     this.getMovies();
     
   }
