@@ -6,6 +6,7 @@
 import axios from "axios";
 import React from "react";
 import Movie from "./Movie";
+import "./App.css"
 
 class App extends React.Component{
 
@@ -20,7 +21,7 @@ class App extends React.Component{
       data: {
         data: {movies}
       }
-    } = await axios.get('http://yts-proxy.now.sh/list_movies.json?sort_by=rating');
+    } = await axios.get('https://yts-proxy.now.sh/list_movies.json?sort_by=rating');
     console.log(movies);
     //this.setState({movies:movies}); -> 아래와 일치. key, property 변수명이 같을 경우 축약해서 사용 가능
     this.setState({ movies, isLoading: false });
@@ -47,20 +48,27 @@ class App extends React.Component{
     const {isLoading, movies} = this.state; // 구조 분해 할당
 
     return (
-      <div>{isLoading ? "Loading" : movies.map(movie => {
-        console.log(movie);
-        return (
-          <Movie 
-            key={movie.id} 
-            id={movie.id} 
-            year={movie.year} 
-            title={movie.title} 
-            summary={movie.summary} 
-            poster={movie.medium_cover_image}
-          />
-        );
-      })}
-      </div>
+      <section className="container">
+        {isLoading 
+          ? <div className="loader">
+              <span className="loader__text">Loading...</span>
+            </div> 
+          : (
+            <div className="movies">
+              {movies.map(movie => (
+                <Movie
+                  key={movie.id}
+                  id={movie.id}
+                  year={movie.year}
+                  title={movie.title}
+                  summary={movie.summary}
+                  poster={movie.medium_cover_image}
+                  genres={movie.genres}
+                />            
+              ))}
+            </div>
+          )}
+      </section>
     );
   }
 }
